@@ -25,11 +25,19 @@ public class Attack implements MobControl {
         Entity entity = player.getTargetEntity(30, true);
         for (PolarBear polarBear : mob) {
             polarBear.setAI(true);
-            if (entity == polarBear || entity == player) {
-                player.sendMessage("불가능");
-            } else {
-                polarBear.setTarget((LivingEntity) entity);
+
+            for (int i = 0; i < mob.size(); i++) {
+                for (int j = 0; j < mob.size(); j++) {
+                    if (entity == mob.get(j) || entity == player){
+                        mob.get(i).setTarget(null);
+                        mob.get(i).setAI(false);
+                    }else {
+                        mob.get(i).setTarget((LivingEntity) entity);
+                    }
+                }
+
             }
+
         }
         attackId = Bukkit.getScheduler().scheduleSyncRepeatingTask(StaffControl.instance, ()->{
             player.sendMessage("공격");
@@ -40,6 +48,8 @@ public class Attack implements MobControl {
             }
         },0,20);
     }
+    
+
 
     public void stop(){
         for (PolarBear polarBear : mob){
