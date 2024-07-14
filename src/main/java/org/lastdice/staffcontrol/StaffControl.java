@@ -18,6 +18,7 @@ public final class StaffControl extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        //aaa
 
         Bukkit.getCommandMap().register("staff", new Command("game"));
 
